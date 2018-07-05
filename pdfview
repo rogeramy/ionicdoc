@@ -1,0 +1,30 @@
+ionic原生控件不支持安卓系统预览pdf文件,Document viewer使用第三方app打开，
+
+使用 https://github.com/Guutong/cordova-plugin-android-native-pdfviewer 安卓系统直接退出，不稳定
+
+https://bendyworks.com/blog/The-Not-At-All-Definitive-Guide-To-Opening-PDF-Files-In-Ionic-2
+
+
+ng2-pdf-viewer
+
+ "ng2-pdf-viewer": "^5.1.0",
+ ionic3.20.0,cordova@8.0.0,angular^5.2.11,node8.11.3,npm5.6.0
+ 
+-- 问题1：Can't bind to 'src' since it isn't a known property of 'pdf-viewer'
+## Importing the module directly in the component needed (your-page.module.ts) instead of importing it in app.module.ts 
+ 
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
+@NgModule({
+declarations: [
+RestoDescPage,
+],
+imports: [
+IonicPageModule.forChild(RestoDescPage),
+PdfViewerModule,
+],
+})
+
+
+ 
+ 
