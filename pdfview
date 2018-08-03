@@ -26,5 +26,19 @@ PdfViewerModule,
 })
 
 
+
+-- 问题2：打开http 路径pdf 跨域问题
+## 如果在asp.net api web.config 添加
+    <httpProtocol>
+      <customHeaders>
+        <!--<add name="Access-Control-Allow-Methods" value="OPTIONS,POST,GET" />-->
+         <!--<add name="Access-Control-Allow-Headers" value="x-requested-with,content-type" />-->
+        <!--<add name="Access-Control-Allow-Origin" value="*" />-->
+      </customHeaders>
+    </httpProtocol>
+导致登陆失败
+
+安装chrome 跨域扩展插件，但是影响 github 操作
+
  
  
