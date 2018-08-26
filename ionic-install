@@ -1,2 +1,2 @@
 安装新版本：sudo npm i -g ionic@latest or npm - -g ionic@3.20.0
-卸载旧版本：sudo npm i -g ionic@3.19.1
+安装指定版本：sudo npm i -g ionic@3.19.1
