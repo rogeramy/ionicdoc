@@ -1,2 +1,16 @@
 安装新版本：sudo npm i -g ionic@latest or npm - -g ionic@3.20.0
 安装指定版本：sudo npm i -g ionic@3.19.1
+
+Nodejs,NPM 通过安装包安装，卸载方法
+1、sudo rm -rf /usr/local/{bin/{node,npm},lib/node_modules/npm,lib/node,share/man/*/node.*}
+
+2、如下：
+sudo npm uninstall npm -g 
+sudo rm -rf /usr/local/lib/node /usr/local/lib/node_modules /var/db/receipts/org.nodejs.* 
+sudo rm -rf /usr/local/include/node /Users/$USER/.npm 
+sudo rm /usr/local/bin/node 
+sudo rm /usr/local/share/man/man1/node.1 
+sudo rm /usr/local/lib/dtrace/node.d
+
+Nodejs 推荐使用 n 进行管理
+sudo npm install -g n
