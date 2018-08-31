@@ -1,0 +1,141 @@
+使用 Angular HTTP 类
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+HttpClient 替换之前版本的 HTTP，直接返回json化的对象
+
+    apiGet(urlStrAndParam: string): Observable<any> {
+        let token = this.userdata.getUserToken();
+        let headers = { headers: new HttpHeaders().set('Authorization', 'bearer ' + token) };
+        return this.http.get(this.getUrl() + urlStrAndParam, headers);
+    }
+    
+        apiPost(urlStr: string, params: string): Observable<any> {
+        let token = this.userdata.getUserToken();
+        let headers = { headers: new HttpHeaders().set('Authorization', 'bearer ' + token).set('Content-Type','application/json') };
+        return this.http.post(this.getUrl() + urlStr, params, headers);
+    }
+    
+ 错误码等统一在拦截器拦截，错误处理（重登陆......)
+import { Injectable, Injector } from '@angular/core';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpErrorResponse,
+  HttpSentEvent,
+  HttpHeaderResponse,
+  HttpProgressEvent,
+  HttpResponse,
+  HttpUserEvent,
+} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+
+import { mergeMap, catchError } from 'rxjs/operators';
+import { ToastController } from 'ionic-angular';
+import { NavController, AlertController, App, Events } from 'ionic-angular';
+/**
+ * 默认HTTP拦截器，其注册细节见 `app.module.ts`
+ */
+@Injectable()
+export class MyInterceptor implements HttpInterceptor {
+  constructor(private injector: Injector,
+    public appCtrl: App,
+    private toastCtrl: ToastController,
+    private events: Events
+  ) { }
+
+  alertMsg(message: any) {
+    const toast = this.toastCtrl.create({
+      message: message,
+      cssClass: 'toast-message', // 目前没用 添加的位置不是想要的
+      position: 'middle', // “top”，“middle”，“bottom”。
+      duration: 10000
+    });
+    toast.present();
+  }
+
+  goToLoginPage() {
+    this.events.publish('user:errHttp');
+  }
+
+  goToPortal() {
+    this.events.publish('user:login');
+  }
+
+
+
+  private handleData(
+    event: HttpResponse<any> | HttpErrorResponse,
+  ): Observable<any> {
+
+    //  this.alertMsg(JSON.stringify(event));
+    // this.alertMsg(event.status);
+
+    // 业务处理：一些通用操作
+    switch (event.status) {
+      case 200:
+        //避免死循环
+        // this.goToPortal();
+        break;
+      case 400: // Bad Request
+        this.goToLoginPage();
+        this.alertMsg(JSON.stringify(event));
+        break;
+      case 401: // 未登录状态码
+        this.goToLoginPage();
+        this.alertMsg(JSON.stringify(event));
+        // this.goTo();
+        break;
+      case 403:
+      case 404:
+      case 500:
+        this.goToLoginPage();
+        this.alertMsg(JSON.stringify(event));
+        break;
+      default:
+        if (event instanceof HttpErrorResponse) {
+          console.warn(
+            '未可知错误，大部分是由于后端不支持CORS或无效配置引起',
+            event,
+          );
+        }
+        this.goToLoginPage();
+        this.alertMsg(JSON.stringify(event));
+        break;
+    }
+    return of(event);
+  }
+
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<
+  | HttpSentEvent
+  | HttpHeaderResponse
+  | HttpProgressEvent
+  | HttpResponse<any>
+  | HttpUserEvent<any>
+  > {
+    // 统一加上服务端前缀
+    const url = req.url;
+    // if (!url.startsWith('https://') && !url.startsWith('http://')) {
+    //   url = `./` + url;
+    // }
+
+    const newReq = req.clone({
+      url: url,
+    });
+    return next.handle(newReq).pipe(
+      mergeMap((event: any) => {
+        // 允许统一对请求错误处理，这是因为一个请求若是业务上错误的情况下其HTTP请求的状态是200的情况下需要
+        if (event instanceof HttpResponse && event.status === 200)
+          return this.handleData(event);
+        // 若一切都正常，则后续操作
+        return of(event);
+      }),
+      catchError((err: HttpErrorResponse) => this.handleData(err)),
+    );
+  }
+}
