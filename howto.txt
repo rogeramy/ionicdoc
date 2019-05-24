@@ -1,2 +1,6 @@
 1.ionic3出现 no component factory found for componet .....
 *.ionic3懒加载，统一使用懒加载，如果依然使用ionic2或之前版本方式，则会出现改问题，改为 'A Page'
+
+日期处理、格式化
+http://momentjs.com/
+
