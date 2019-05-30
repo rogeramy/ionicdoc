@@ -40,5 +40,11 @@ PdfViewerModule,
 
 安装chrome 跨域扩展插件，但是影响 github 操作
 
- 
- 
+ 2.强制cordova使用UIWebView引擎渲染页面
+(1)在config.xml里增加以下配置
+<preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
+(2)卸载WKWebView
+ $ ionic cordova plugin remove cordova cordova-plugin-ionic-webview --save
+$ rm -rf platforms/
+$ rm -rf plugins/
+$ ionic cordova build ios
