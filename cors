@@ -1,0 +1,10 @@
+asp.net api2
+
+Miscrosoft.aspnet.webapi.cors
+
+app_start/webapiconfig.cs
+
+public static void register(...){
+var cors=new EnableCorsAttribute("","","")
+config.enablecors(cors)
+
