@@ -1,0 +1,9 @@
+安装node 10.16.0
+安装 angular cli，必须在管理员cmd命令下执行：npm install -g @angular/cli
+安装yarn，管理员cmd执行：npm install -g yarn
+
+下载alain
+git clone --depth=1 https://github.com/ng-alain/ng-alain.git my-project
+cd my-project
+yarn
+npm start
