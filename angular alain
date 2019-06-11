@@ -1,5 +1,5 @@
 安装node 10.16.0
-安装 angular cli，必须在管理员cmd命令下执行：npm install -g @angular/cli
+安装 angular cli，必须在管理员cmd命令下执行：npm install -g @angular/cli。目前支持7版本，安装7.3.9，npm install -g @angular/cli@7.3.9
 安装yarn，管理员cmd执行：npm install -g yarn
 
 下载alain
