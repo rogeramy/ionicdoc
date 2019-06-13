@@ -7,3 +7,51 @@ git clone --depth=1 https://github.com/ng-alain/ng-alain.git my-project
 cd my-project
 yarn
 npm start
+
+
+在 ng-alain 中，一个完整的 Angular 应用从前端 UI 交互到服务端处理流程是这样的：
+1、首次启动 Angular 执行 APP_INITIALIZER；
+2、UI 组件交互操作；
+3、使用 HttpClient 发送请求；
+4、触发用户认证拦截器 @delon/auth，统一加入 token 参数；
+  a、若未存在 `token` 或已过期中断后续请求，直接跳转至登录页；
+  
+5、触发默认拦截器，统一处理前缀等信息；
+6、获取服务端返回；
+7、触发默认拦截器，统一处理请求异常、业务异常等；
+8、数据更新，并刷新 UI。
+
+
+ng-alain 默认装载了两个拦截器：@delon/auth 用户认证和默认拦截器
+
+本身是为 ng-alain 脚手架提供的一个用户认证模块，包含主流的 JWT（Json Web Token）和一个相对通用 Simple Web Token，而其核心是对认证过程进一步处理。而通常其核心在于用户 Token 的获取、使用环节。
+同时，@delon/auth 并不会关心用户界面是怎么样，只需要当登录成功后将后端返回的数据交给 ITokenService，它会帮你存储在 localStorage（默认） 当中；当发起一个网络请求时，它会在自动在 header（默认） 当中加入相应的 token 信息。
+
+因此，@delon/auth 不限于 ng-alain 脚手架，任何 Angular 项目都可以使用它。
+
+默认装载了 SimpleInterceptor 拦截器，意味者一开始使用 ng-alain 为什么会无缘无故无法正确请求，而是直接抛出异常。
+
+服务端如果是基于ASP.NET API 验证方式，传入token为：Authorization: bearer，需要重写
+a) ng-alain的用户认证默认发给后端的认信息的key值是token，如过要更改可以在src -> app -> delon.module.ts中修改如下
+import { DelonAuthConfig } from '@delon/auth';
+export function fnDelonAuthConfig(): DelonAuthConfig {
+  // return {
+  //   ...new DelonAuthConfig(),
+  //   login_url: '/passport/login',
+  // };
+  return Object.assign(new DelonAuthConfig(), <DelonAuthConfig>{
+    login_url: '/passport/login',
+    token_send_key: 'Authorization',
+    token_send_template: 'Bearer ${token}'
+  });
+
+}
+
+设置后台接口服务的basicUrl
+
+修改 src -> environments 文件夹下
+生产环境和开发环境的ts文件中的 SERVER_URL
+export const environment = {
+  SERVER_URL: `http://服务器地址`,
+  ....
+};
