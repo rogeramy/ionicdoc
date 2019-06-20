@@ -55,3 +55,9 @@ export const environment = {
   SERVER_URL: `http://服务器地址`,
   ....
 };
+
+** alain 使用 http post 提示错误：The request entity's media type 'text/plain' is not supported for this resource
+.. 客户端不需要使用 json 工具序列化成字符串，再post，直接 post 内传对象 .post('.../api/QLogic/AddQues', postdata, headers)，不能使用 JSON.stringify，否则request头就不是Content-Type: application/json，而是Content-Type: text/plain
+
+** alain 发布，IIS网站的子目录下，需要重写 build ，否则导致引用的css，script文件路径不正确
+.. package.json 文件，"build": "npm run color-less && ng build --prod --build-optimizer --base-href ./", 加上后面这部分： --base-href ./
