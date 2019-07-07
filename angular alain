@@ -3,7 +3,7 @@
 @angular/cli@7.3.9 
 可以在后面使用淘宝镜像：--registry=https://registry.npm.taobao.org
 
-安装yarn，管理员cmd执行：npm install -g yarn
+安装yarn，管理员cmd执行：npm install -g yarn --registry=https://registry.npm.taobao.org
 
 下载alain
 git clone --depth=1 https://github.com/ng-alain/ng-alain.git my-project
