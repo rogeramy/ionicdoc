@@ -64,3 +64,7 @@ export const environment = {
 
 ** alain 发布，IIS网站的子目录下，需要重写 build ，否则导致引用的css，script文件路径不正确
 .. package.json 文件，"build": "npm run color-less && ng build --prod --build-optimizer --base-href ./", 加上后面这部分： --base-href ./
+
+** npm start 编译时候出错，JavaScript heap out of memory
+.. 初步判断是执行 color-less文件内容时候出错，可能和agalain升级到支持angular8有关，暂时解决办法先把执行color-less代码去掉：package.json文件内改成：
+   "start": "ng serve -o","build": "ng build --prod --build-optimizer --base-href ./",
