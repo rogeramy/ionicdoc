@@ -70,3 +70,5 @@ export const environment = {
    "start": "ng serve -o","build": "ng build --prod --build-optimizer --base-href ./",
    
 ** <nz-option [nzValue]="1" [nzLabel]="'南向'"></nz-option> nzValue在中括号内，值1是数字，<nz-option nzValue="1" [nzLabel]="'南向'"></nz-option> 这种方式1是字符串，如果后台ngmodel数据是数字，则无法选中
+
+** select 重置选择（去掉选择项），设置ngModel对应的值为null，不能设置-1等其它数字
