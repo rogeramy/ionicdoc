@@ -68,3 +68,5 @@ export const environment = {
 ** npm start 编译时候出错，JavaScript heap out of memory
 .. 初步判断是执行 color-less文件内容时候出错，可能和agalain升级到支持angular8有关，暂时解决办法先把执行color-less代码去掉：package.json文件内改成：
    "start": "ng serve -o","build": "ng build --prod --build-optimizer --base-href ./",
+   
+** <nz-option [nzValue]="1" [nzLabel]="'南向'"></nz-option> nzValue在中括号内，值1是数字，<nz-option nzValue="1" [nzLabel]="'南向'"></nz-option> 这种方式1是字符串，如果后台ngmodel数据是数字，则无法选中
