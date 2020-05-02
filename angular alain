@@ -86,3 +86,9 @@ export const environment = {
 ** <nz-option [nzValue]="1" [nzLabel]="'南向'"></nz-option> nzValue在中括号内，值1是数字，<nz-option nzValue="1" [nzLabel]="'南向'"></nz-option> 这种方式1是字符串，如果后台ngmodel数据是数字，则无法选中
 
 ** select 重置选择（去掉选择项），设置ngModel对应的值为null，不能设置-1等其它数字
+
+
+
+##### alain封装G2组件不显示图表
+
+图表不能显示，拖动浏览器可以显示，主要因为图表在数据没有准备好之前先渲染了。需要配置一个延迟加载量，但延迟加载时间是无法把握的，如果是来自网络的数据源，最佳做法是使用 *ngIf 做判断，数据源准备好之后才渲染
