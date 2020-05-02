@@ -1,28 +1,37 @@
-#### git commit 提交的时候报错
-
-Q: husky > pre-commit hook failed (add --no-verify to bypass)
-
-这个问题是因为当你在终端输入git commit -m "XXX",提交代码的时候,pre-commit(客户端)钩子，它会在Git键入提交信息前运行做代码风格检查。如果代码不符合相应规则，则报错，而它的检测规则就是根据.git/hooks/pre-commit文件里面的相关定义
-
-1. 卸载husky。只要把项目的package.json文件中devDependencies节点下的husky库删掉，然后重新npm i 一次即可。或者直接在项目根目录下执行npm uninstall husky --save也可以，再次提交，自动化测试功能就屏蔽掉
-2. 进入项目的.git文件夹(文件夹默认隐藏,可先设置显示或者命令ls查找),再进入hooks文件夹,删除pre-commit文件,重新git commit -m 'xxx' git push即可
-3. 将git commit -m "XXX" 改为 git commit --no-verify -m "XXX"
-
-目前使用方案2，使用git desktop提交
-
 #### ng-alain环境安装
 
-安装node 10.16.0
-安装 angular cli，必须在管理员cmd命令下执行：npm install -g @angular/cli。目前支持7版本，安装7.3.9，npm install -g 
-@angular/cli@7.3.9 
-可以在后面使用淘宝镜像：--registry=https://registry.npm.taobao.org
+node:v12.16.1
+npm:6.13.4
 
-安装yarn，管理员cmd执行：npm install -g yarn --registry=https://registry.npm.taobao.org
+设置正确淘宝镜像，能访问外网的飘过，注意必须设置 sass
+npm config set registry https://registry.npm.taobao.org
+npm config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass
 
-下载alain
-git clone --depth=1 https://github.com/ng-alain/ng-alain.git my-project
-cd my-project
+恢复
+npm config delete registry
+npm config delete sass_binary_site
+
+安装yarn
+1.22.1
+npm install -g yarn
+
+设置正确yarn淘宝镜像，必须设置sass
+yarn config set registry https://registry.npm.taobao.org
+yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass
+
+恢复
+yarn config delete registry
+yarn config delete sass_binary_site
+
+安装 angular/cli
+
+angular/cli:9.0.5
+
+从github拷贝脚手架
+
+
 yarn
+
 npm start
 
 
@@ -88,6 +97,46 @@ export const environment = {
 ** select 重置选择（去掉选择项），设置ngModel对应的值为null，不能设置-1等其它数字
 
 
+
+#### ngx-echarts 使用
+
+##### 安装
+
+[https://www.npmjs.com/package/ngx-echarts](ngx-echarts官网)
+
+使用 yarn 安装，安装前先设置 yarn 的淘宝镜像
+
+设置正确yarn淘宝镜像，必须设置sass
+yarn config set registry https://registry.npm.taobao.org
+yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass
+
+恢复：
+yarn config delete registry
+yarn config delete sass_binary_site
+
+
+
+yarn 安装，转到项目文件目录下：
+
+```
+yarn add echarts
+yarn add ngx-echarts
+yarn add @types/echarts -D
+```
+
+
+
+##### 问题 Can't bind to 'options' since it isn't a known property
+
+import { NgxEchartsModule } from 'ngx-echarts' 这个不一定放在app.module.ts中，
+
+就以直接下载的ng-alain demo为例，如果想在http://localhost:4200/#/dashboard 页面中使用 echart，则需要将 import { NgxEchartsModule } from 'ngx-echarts' 放在 routes.module.ts文件中 ，代码如下所示
+
+import{NgxEchartsModule}from 'ngx-echarts';而在alain框架中，页面都是在route模块下的二级路由中，在appmodule中引入在route模块下的页面并获取不到，因此要把ngx-echarts模块在route.module.ts中引入
+
+
+
+#### 问题记录
 
 ##### alain封装G2组件不显示图表
 
