@@ -141,3 +141,26 @@ import{NgxEchartsModule}from 'ngx-echarts';而在alain框架中，页面都是�
 ##### alain封装G2组件不显示图表
 
 图表不能显示，拖动浏览器可以显示，主要因为图表在数据没有准备好之前先渲染了。需要配置一个延迟加载量，但延迟加载时间是无法把握的，如果是来自网络的数据源，最佳做法是使用 *ngIf 做判断，数据源准备好之后才渲染
+
+
+
+##### npm build maximum exceeded for initial
+
+打开**angular.json**文件，找到budgets看到这段：
+
+"budgets": [
+   {
+      "type": "initial",
+      "maximumWarning": "6mb",
+      "maximumError": "6mb"
+   }
+]
+
+修改为更大值
+
+
+
+##### 发布到IIS，访问时候css等文件404错误
+
+*alain 发布，IIS网站的子目录下，需要重写 build ，否则导致引用的css，script文件路径不正确
+.. package.json 文件，"build": "npm run color-less && ng build --prod --build-optimizer --base-href ./", 加上后面这部分： --base-href ./

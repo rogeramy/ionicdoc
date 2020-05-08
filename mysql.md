@@ -22,3 +22,9 @@ MySQL8.0.16版本，下载windows安装包
 
 utf8	utf8_general-ci
 
+
+
+### 建模工具 MYSQL Workbench
+
+安装与 MySQL 对应版本 windows 有安装包
+
