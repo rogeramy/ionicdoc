@@ -139,9 +139,24 @@ static String genSerialID()
 ##### 实体类操作
 
 1. JPA 对应的实体，通过 IDEA Groovy模板生成
+
 2. JPA 需要添加 @Entity注解并设置 @Id
-3. 普通业务实体，编写变量后可以通过IDEA工具自动生成 setter/getter等
+
+3. 普通业务实体，编写变量后可以通过IDEA工具自动生成 setter/getter等，在字段 右键 -generate
+
 4. 普通业务实体，也可以使用 Lombok 省去 setter/getter。通过@data和@setter/@getter注解
+
+5. @Column 字段命名 默认驼峰转换，会根据转换后的驼峰字段格式去数据库找对应字段，禁用该策略在application.properties文件中加入:
+
+   ```
+   
+   #PhysicalNamingStrategyStandardImpl
+   spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+   ```
+
+   
+
+6. wait
 
 
 
