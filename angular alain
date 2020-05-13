@@ -136,6 +136,55 @@ import{NgxEchartsModule}from 'ngx-echarts';而在alain框架中，页面都是�
 
 
 
+##### echarts tree 点击收起同级兄弟节点
+
+在树中一个节点的展示与收缩是通过节点的collapsed属性进行控制的，collapsed = true，收缩；false，节点展开。解决思路：首先绑定一个点击事件，我们就可以知道被点击的节点的params.name,.既然我们知道根节点，我们就可以对根节点进行往下遍历（DFS），得知每一个节点的深度，深度与点击节点相同的即是同级节点。最终将所有节点对应的collapsed赋对应的值就好了。
+
+可以使用name作为唯一标记，也可以定义其他属性，比如id。
+
+更简单的方式，假如需求只需要收起倒数第二排节点，那么可以给倒数第二排节点给予一个特殊标记（比如 needC:true，点击时候遍历到存在该特殊标记的全部收起，如果是当前点击的节点，则忽略。
+
+```
+let current_dep = 0;
+    myChart.on('click', function(params) {
+        dfs(option.series[0].data, params.name, 0);
+        solve(option.series[0].data, params.name, current_dep);
+        myChart.clear();
+        myChart.setOption(option);
+    });
+    function dfs(array, id, dep) {
+        array.forEach((obj, i) => {
+            obj.dep = dep;
+            if(obj.name === id) {
+                current_dep = dep;
+                console.log("current: " + current_dep);
+            } else if(obj.children !== undefined && obj.children.length > 0) {
+                return dfs(obj.children, id, dep + 1);
+            }
+        })
+    }
+    function solve(array, id, current_dep) {
+        array.forEach((obj, i) => {
+            if(obj.dep < current_dep) {
+                obj.collapsed = false;
+                if(obj.children && obj.children.length > 0) {
+                    solve(obj.children, id, current_dep);
+                }
+            } else if(obj.dep === current_dep) {
+                if(obj.name === id) {
+                    obj.collapsed = false;
+                } else {
+                    obj.collapsed = true;
+                }
+            }
+        })
+    }
+```
+
+
+
+
+
 #### 问题记录
 
 ##### alain封装G2组件不显示图表

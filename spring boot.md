@@ -2,7 +2,21 @@
 
 ##### 生成JPAEntity
 
-自定义 POJOs.groovy 文件
+安装 JPA 模块，project strueture - Modules ，点击 + 添加 JPA 模块
+
+添加 JPA 模块后，才能看到 Persistence，一般在 IDEA 左下侧栏
+
+Database 添加数据库连接
+
+从 Persistence 生成 Entity，Generate Persistence Mapping、By Database Schema打开Import Database Schema窗口
+
+![image-20200513204824819](C:\ionicdoc\images\image-20200513204824819.png)
+
+
+
+
+
+其它方式：自定义 POJOs.groovy 文件
 
 ```
 
@@ -159,6 +173,19 @@ static String genSerialID()
 6. wait
 
 
+
+##### spring-boot-starter-data-rest 使用
+
+可以不编写Controller，JPA自动内置 Restful，通过IP地址/EntityName 获取，添加以下依赖，例如：http://127.0.0.1:8080/worktitleEntities
+
+```
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+```
+
+但权限怎么管理？
 
 
 
