@@ -187,15 +187,49 @@ static String genSerialID()
 
 但权限怎么管理？
 
+通常不建议使用
+
+
+
+##### 4.生成 spring boot bcrptPassword
+
+[B cript 地址](https://bcrypt-generator.com/)
+
+
+
+##### JWT Authentication
+
+[doc]: https://dzone.com/articles/implementing-jwt-authentication-on-spring-boot-api
+
+[样例](https://github.com/echisan/springboot-jwt-demo/blob/master/blog_content.md)
+
 
 
 ### 坑洞
 
 ##### JPA 
 
-###### IllegalArgumentException: Not a managed type
+###### 1.IllegalArgumentException: Not a managed type
 
 1. 实体类没有添加@Entity
 2. 实体中@Entity、@Table、@Id引入类型错误
 3. 没有默认按照springboot的默认扫描方式，默认扫描（application.java入口类的相对的兄弟包和及其子包）
 
+###### 2.@Qualifier共用出现提示信息Cannot find bean with
+
+在intellij idea file-settings-editor-Inspections-spring 把右边的Mixed 改为warning
+
+
+
+###### 3.HikariConnectionPool - Failed to validate connection
+
+在 application.properties 添加如下：
+
+```
+spring.datasource.testOnBorrow=true
+spring.datasource.validationQuery=SELECT 1
+```
+
+
+
+###### spring boot restful url 默认区分大小写
