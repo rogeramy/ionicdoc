@@ -197,11 +197,15 @@ static String genSerialID()
 
 
 
-##### JWT Authentication
+##### 5.JWT Authentication
 
 [doc]: https://dzone.com/articles/implementing-jwt-authentication-on-spring-boot-api
 
 [样例](https://github.com/echisan/springboot-jwt-demo/blob/master/blog_content.md)
+
+##### 6.文档在线浏览方案
+
+[online](https://gitee.com/kekingcn/file-online-preview)
 
 
 
@@ -232,4 +236,4 @@ spring.datasource.validationQuery=SELECT 1
 
 
 
-###### spring boot restful url 默认区分大小写
+###### 4.spring boot restful url 默认区分大小写
