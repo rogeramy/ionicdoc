@@ -183,6 +183,36 @@ let current_dep = 0;
 
 
 
+##### 4.echarts 钻取
+
+[地图](https://www.cnblogs.com/timeddd/p/11169188.html)
+
+https://github.com/triplestudio/helloworld/releases
+
+[Bar](https://blog.csdn.net/lifhcode/article/details/81221693)
+
+
+
+##### 5.echarts 动态更新数据
+
+```
+<div echarts [options]="chartOption"  (chartInit)="onChartInit($event)"></div>
+```
+
+在 onChartInit中获取 echarts对象
+
+```
+ this.chartOption = option;
+    this.chartOption.xAxis[0].data = timeSeries;
+    this.chartOption.series = item;
+    if (this.echartsIntance) {
+      this.echartsIntance.clear();
+      this.echartsIntance.setOption(this.chartOption, true);
+    }
+```
+
+注意，option 不要设置 echarts 对象类型，或者设置到具体的图表对象，否则可能出现   this.chartOption.xAxis[0].data 找不到 data 对象
+
 
 
 #### 问题记录
@@ -235,3 +265,28 @@ let current_dep = 0;
 ##### 5.更改登录页面背景图片
 
 C:\Users\rogerwin2020\Desktop\ng-alain-master\src\app\layout\passport\passport.component.less
+
+
+
+##### 6.xlsx 导出提示 XLSX没有定义
+
+没有引用到对应的 xlsx.full.min.js 文件，默认使用：//cdn.bootcss.com/xlsx/0.15.6/xlsx.full.min.js，如果网络限制，则存在错误信息，可以更改为其它url或者使用本地文件，https://oss.sheetjs.com/sheetjs/xlsx.full.min.js
+
+8.X 版本修改，app.module.ts文件
+
+```
+import { XlsxConfig } from '@delon/abc';
+export function fnXlsxConfig(): XlsxConfig {
+  return { ...new XlsxConfig(), ...{ url: 'https://oss.sheetjs.com/sheetjs/xlsx.full.min.js' } as XlsxConfig };
+}
+```
+
+```
+providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, ...APPINIT_PROVIDES, ApiHelp, { provide: XlsxConfig, useFactory: fnXlsxConfig }],
+```
+
+
+
+9.X版本参考官方文档
+
+也可以在使用的页面，引入xlsxconfig，init()内指定url，this.xlsxconfig.url =''，不建议
