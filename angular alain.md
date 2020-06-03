@@ -215,6 +215,24 @@ https://github.com/triplestudio/helloworld/releases
 
 
 
+#### pdf view
+
+##### 1.ng2-pdf-view
+
+[github](https://github.com/VadimDez/ng2-pdf-viewer)
+
+
+
+##### 2.安装与ng-alain兼容问题
+
+安装最新版本ng2-pdf-view之后，alain编译失败。npm删除ng2-pdf-view，但项目package.json文件还有，重新yarm后OK
+
+##### 3.加载pdf后有错误信息，浏览器内存一直在涨
+
+[问题解决可能方案1](https://github.com/VadimDez/ng2-pdf-viewer/issues/358)
+
+
+
 #### 问题记录
 
 ##### 1.alain封装G2组件不显示图表
