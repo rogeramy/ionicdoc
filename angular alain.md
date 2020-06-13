@@ -308,3 +308,17 @@ providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, 
 9.X版本参考官方文档
 
 也可以在使用的页面，引入xlsxconfig，init()内指定url，this.xlsxconfig.url =''，不建议
+
+
+
+##### 7.路由传参数
+
+```
+import { Router,ActivatedRoute } from '@angular/router';
+
+this.router.navigateByUrl('om/train/plan?planId=8');
+
+// const productId = this.activatedRoute.queryParams._value.planId;
+const productId = this.activatedRoute.snapshot.queryParams.planId;
+```
+
