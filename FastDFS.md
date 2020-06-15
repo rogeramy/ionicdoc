@@ -18,5 +18,13 @@ GitHub: https://github.com/RainyGao-GitHub/DocSys
 
 
 
+### Minio
 
+[guide](https://docs.minio.io/docs/)
+
+[demo1](https://zhuanlan.zhihu.com/p/142267115?from_voters_page=true)
+
+[demo2](https://github.com/yzcheng90/X-SpringBoot)
+
+[demo3](https://blog.csdn.net/qq_15273441/article/details/100094667)
 
