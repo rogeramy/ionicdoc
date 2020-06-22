@@ -209,6 +209,18 @@ static String genSerialID()
 
 
 
+
+
+### Spring boot
+
+##### JPA 事务对应的 JAR 包
+
+import org.springframework.transaction.annotation.Transactional
+
+
+
+
+
 ### 坑洞
 
 ##### JPA 
@@ -246,3 +258,10 @@ spring.datasource.validationQuery=SELECT 1
 
 后台参数名称与前端上传空间的name必须一直，一般默认都是"file"。@RequestParam("file")
 
+
+
+##### IDEA
+
+###### 1.Database 看不到数据库和表
+
+datasource properties - Schemas 选中数据库

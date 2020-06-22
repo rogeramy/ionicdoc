@@ -324,3 +324,10 @@ this.router.navigateByUrl('om/train/plan?planId=8');
 const productId = this.activatedRoute.snapshot.queryParams.planId;
 ```
 
+
+
+##### 使用 asset 资源文件，路径设置
+
+1. Angular中，html中的路径要写成开头不带/的绝对路径。比如 img src="assets/hello.png">
+2. Angular中，CSS中的路径要写成相对路径，比如background-image: url('../../../assets/hhh.png');
+3. Angular项目ng build编译后的index.html中的base ref要设置为空，即<base href="">
