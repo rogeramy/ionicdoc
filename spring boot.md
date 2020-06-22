@@ -237,3 +237,12 @@ spring.datasource.validationQuery=SELECT 1
 
 
 ###### 4.spring boot restful url 默认区分大小写
+
+
+
+##### 文件上传
+
+###### 1.Required request part 'file' is not present
+
+后台参数名称与前端上传空间的name必须一直，一般默认都是"file"。@RequestParam("file")
+

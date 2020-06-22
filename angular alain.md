@@ -284,6 +284,8 @@ https://github.com/triplestudio/helloworld/releases
 
 C:\Users\rogerwin2020\Desktop\ng-alain-master\src\app\layout\passport\passport.component.less
 
+注意去掉：background-position: center 110px;
+
 
 
 ##### 6.xlsx 导出提示 XLSX没有定义
