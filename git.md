@@ -26,3 +26,11 @@ Q: husky > pre-commit hook failed (add --no-verify to bypass)
 
 
 
+##### 命令行提交
+
+git add .
+git commit -m "提交test1.html"
+git push -u origin master
+
+
+
