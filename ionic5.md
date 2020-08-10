@@ -118,6 +118,45 @@ ionic cordova plugin add cordova-plugin-telerik-imagepicker --variable PHOTO_LIB
 
 
 
+###### 5.WARNING: sanitizing unsafe URL value
+
+在项目中有时候需要在叫页面上显示图片，音频的信息，在项目中我把图片和音频等文件都转成了base64格式上传到服务器数据库。
+
+在Ionic2项目中比如使用：img，iframe，audio标签的src，a标签的href，需要使用数据库传来的base64数据时，变量直接赋值到url绑定数据的话，会报错，同样，需要引入外部url的资源链接也会报错
+
+网上找了很多资料：才发现是Ionic2和TypeScript中对外部url资源链接做了安全限制
+官网文档中对此做了解释：[](http://http://g.co/ng/security#xss)
+
+```
+//1.在需要使用外部url链接的ts文件中，引入DomSanitizer类
+import { DomSanitizer } from '@angular/platform-browser';  
+
+export class safeHtml{  
+
+  safeUrl : any;  
+
+  constructor(private sanitizer: DomSanitizer) {}  
+
+  //2.在需要使用转换后的url地方加上
+  getSafeUrl(url){
+      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url); 
+  }
+```
+
+```
+<audio controls="controls" [src]="safeUrl"></audio>
+```
+
+
+
+###### 6.图片预览
+
+在手机上预览图片，预览缩略图，使用 base64方式，file url 方式有权限限制
+
+
+
+
+
 ##### 打包
 
 ###### 图标与名称
