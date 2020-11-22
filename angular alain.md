@@ -98,6 +98,19 @@ export const environment = {
 
 
 
+##### 1.angular/cli 升级
+
+```
+卸载
+npm uninstall -g @angular/cli
+
+更新
+npm install -g @angular/cli@latest
+npm install -g @angular/cli@版本号
+```
+
+
+
 #### ngx-echarts 使用
 
 ##### 安装
