@@ -1,3 +1,21 @@
+### 数据访问
+
+##### JPA+Querydsl
+
+
+
+[Querydsl Reference Guide](http://www.querydsl.com/static/querydsl/latest/reference/html/index.html)
+
+
+
+##### Mybatis
+
+MyBatis Generator
+
+MyBatis-Plus
+
+
+
 ### 操作
 
 ##### 生成JPAEntity
