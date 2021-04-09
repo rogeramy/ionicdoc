@@ -155,6 +155,62 @@ export class safeHtml{
 
 
 
+###### 7.Unexpected token h in JSON at position 0 at JSON.parse | http.get 返回格式设置
+
+通过 http.get 返回的数据，默认是 json格式，会进行json转换，如果返回的是 url 链接，可能导致转换出错。修改http.get 返回格式为text
+
+如果显示设置了 responseType，必须：'text' as 'text'，'json' as 'json'，否则默认是 json
+
+```
+ const token = this.userdata.getUserToken();
+
+    const headers = {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + token), responseType: 'text' as 'text'
+    };
+
+    return this.http.get(this.getUrl() + urlStrAndParam, headers);
+```
+
+[详细bug说明](https://www.cnblogs.com/wangtingnoblog/p/10322483.html)
+
+
+
+###### 8.ion-select默认绑定选项
+
+```
+ <ion-select interface="popover" value="{{obj.quesStatusId}}" (ionChange)="quesStatusChange($event)">
+        <ion-select-option value=1>进行中</ion-select-option>
+        <ion-select-option value=100>完成</ion-select-option>
+      </ion-select>
+```
+
+
+
+###### 9.安卓不能访问http地址
+
+在ionic4打包成Android包以后真机运行的时候可能会报ERR_ClEARTEXT_NOT_PERMITTED错误，原因是Android8以后对网络安全进行了限制，不允许明文传输，即http请求
+
+1、Android版本降级，删除原Android8以上版本，添加Android7以下版本
+
+```
+
+ionic cordova platform rm android//执行删除Android平台命令
+ 
+ionic cordova plarform add android@7.X//添加Android7版本或者以下版本
+```
+
+2、放开对HTTP的限制
+
+需要对下图2个文件进行修改，文件路径在：项目名/platforms/android/app/src/main/res/xml/network_security_config.xml和项目名/platforms/android/app/src/main/AndroidManifest.xml
+
+首先修改network_security_config.xml文件,localhost修改为需要访问的第三方接口地址
+
+修改AndroidManifest.xml文件，在<application />标签添加android:networkSecurityConfig="@xml/network_security_config" android:usesCleartextTraffic="true"
+
+```
+<application android:networkSecurityConfig="@xml/network_security_config"  android:usesCleartextTraffic="true"></application>
+```
+
 
 
 ##### 打包
