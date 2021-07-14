@@ -10,6 +10,15 @@ NgxEchartsModule.forRoot({
 })
 ```
 
+###### 10以上版本安装
+
+```
+出错：The target entry-point "ngx-echarts" has missing dependencies
+
+解决：npm i @juggle/resize-observer
+（不要使用互联网其它方式）
+```
+
 
 
 ##### 使用
