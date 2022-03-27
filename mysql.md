@@ -18,7 +18,7 @@ MySQL 使用 tinyint(1)，spring-boot JPA 对应为 Boolean
 
 ### 问题
 
-##### 不能远程连接
+##### 不能远程连接，每一句后面的;是必须的
 
 1. 打开mysql控制台，输入：use mysql;
 2. 输入：show tables;
